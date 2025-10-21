@@ -21,10 +21,12 @@ with an indicator variable '_imputation_' to identify each imputed dataset.
 
 ---------------------------------------------------------------------------------------*/
 * Define libraries;
-libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS';
+libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
 
 * Set macro variables ;
-%let data=ch_four.sol_mi_long ;
+%let data= ch_four.sol_mi_long ;
+
+
 
 /*
 Macro: GEE_SUDAAN
@@ -46,15 +48,19 @@ Arguments:
 Outputs: Dataset 'betas_mi' containing combined parameter estimates suitable for MIANALYZE.
 
  */
-%macro GEE_SUDAAN(data,strata, psu, wt, response, covars,class, class_ref,
-	nimpute=10);
+%macro GEE_SUDAAN(data, strata, psu, wt, response, covars, class, class_ref, nimpute=10);
 
 	* Loop over each imputed dataset ;
 	%do j=1 %to &nimpute.;
 
+		data db;
+			set &data.;
+			
+			if _imputation_ = &j. then output;
+		run;
+		
 		* Fit the GEE model using REGRESS procedure in the j-th imputed dataset ;
-		proc regress data=df(where=(_imputation_=&j.)) filetype=sas
-			r=independent semethod=zeger notsorted;
+		proc regress data=db filetype=sas r=independent semethod=zeger notsorted;
 			nest &strata. &psu.;
 			weight &wt.;
 			class &class.;
@@ -125,12 +131,14 @@ data data;
 run;
 
 * Call the GEE_SUDAAN macro to fit the model and obtain estimates ;
-%GEE_SUDAAN(data=data, strata=strat, psu=hh_id_num, wt=
-	weight_final_norm_overall, response=sbp5, covars=bmi agegroup_c6
-	bkgrd1_c7nomiss centernum sex us_born employed education_c3 time, class=
-	agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3,
-	class_ref= agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0
-	employed=1 education_c3=1);
+%GEE_SUDAAN(data=data, 
+	strata=strat, 
+	psu=hh_id_num, 
+	wt=weight_final_norm_overall, 
+	response=sbp5, 
+	covars=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time, 
+	class= agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3,
+	class_ref= agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1);
 
 * Print the final combined estimates ;
 proc print data=betas_mi;

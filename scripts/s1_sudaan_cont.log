@@ -1,0 +1,817 @@
+1                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+ERROR: Expecting page 1, got page -1 instead.
+ERROR: Page validation error while reading SASUSER.PROFILE.CATALOG.
+NOTE: Unable to open SASUSER.PROFILE. WORK.PROFILE will be opened instead.
+NOTE: All profile changes will be lost at the end of the session.
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
+      Licensed to UNIVERSITY OF NORTH CAROLINA CHAPEL HILL - SFA T&R, Site 70022629.
+NOTE: This session is executing on the W32_10PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 14.2
+      SAS/ETS 14.2
+      SAS/OR 14.2
+      SAS/IML 14.2
+      SAS/QC 14.2
+
+NOTE: Additional host information:
+
+ W32_10PRO WIN 10.0.22621  Workstation
+
+NOTE: SAS initialization used:
+      real time           0.34 seconds
+      cpu time            0.12 seconds
+      
+1          * set home path;
+2          %let homepath=J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_simulation\Manual_V3;
+3          
+4          /*---------------------------------------------------------------------------------------
+5          
+6          Program: s1_sudaan_cont.sas
+7          
+8          Purpose: Fit a GEE model for continuous outcomes using SUDAAN's REGRESS procedure
+9          across multiple imputed datasets and combine the results using MIANALYZE.
+10         
+11         Author: Quijano-Angarita, A..
+12         
+13         Date: October 21, 2025
+14         
+15         Notes:
+16         - This script assumes that the imputed datasets are stored in a single dataset
+17         with an indicator variable '_imputation_' to identify each imputed dataset.
+18         - The macro GEE_SUDAAN fits the GEE model for each imputed dataset and prepares the results for MIANALYZE.
+19         - Ensure that SUDAAN is properly installed and configured to run the REGRESS procedure.
+20         - Modify the macro call at the end of the script to specify the appropriate variables and dataset names.
+21         
+22         ---------------------------------------------------------------------------------------*/
+23         * Define libraries;
+24         libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
+NOTE: Libref CH_FOUR was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS
+25         
+26         * Set macro variables ;
+27         %let data= ch_four.sol_mi_long ;
+28         
+2                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+29         
+30         
+31         /*
+32         Macro: GEE_SUDAAN
+33         
+34         Purpose: Fit a GEE model using SUDAAN's REGRESS procedure across multiple imputed datasets
+35         and prepare the results for MIANALYZE.
+36         
+37         Arguments:
+38         - data: Name of the input dataset containing imputed datasets.
+39         - strata: Stratification variable for the survey design.
+40         - psu: Primary sampling unit variable for the survey design.
+41         - wt: Weight variable for the survey design.
+42         - response: Dependent variable in the GEE model.
+43         - covars: Independent variables in the GEE model.
+44         - class: Categorical variables to be treated as class variables.
+45         - class_ref: Reference levels for the categorical variables.
+46         - nimpute: Number of imputed datasets (default is 10).
+47         
+48         Outputs: Dataset 'betas_mi' containing combined parameter estimates suitable for MIANALYZE.
+49         
+50          */
+51         %macro GEE_SUDAAN(data, strata, psu, wt, response, covars, class, class_ref, nimpute=10);
+52         
+53         	* Loop over each imputed dataset ;
+54         	%do j=1 %to &nimpute.;
+55         
+56         		data db;
+57         			set &data.;
+58         			
+59         			if _imputation_ = &j. then output;
+60         		run;
+61         		
+62         		* Fit the GEE model using REGRESS procedure in the j-th imputed dataset ;
+63         		proc regress data=db filetype=sas r=independent semethod=zeger notsorted;
+64         			nest &strata. &psu.;
+65         			weight &wt.;
+66         			class &class.;
+67         			model &response.=&covars.;
+68         			reflevel &class_ref.;
+69         			output beta sebeta / filename=est_mi_&j. filetype=sas replace;
+70         		run;
+71         
+72         		* Prepare the estimates including imputation number and a categorical variable name as
+73         			SUDAAN does not output variable names directly ;
+74         		data betas_mi_&j.;
+75         			set est_mi_&j.;
+76         			* add imputation number ;
+77         			_imputation_=&j.;
+78         			* create variable names ;
+79         			parm=cats('Var',MODELRHS);
+80         			* rename estimates for MIANALYZE ;
+81         			rename beta=Estimate sebeta=StdErr;
+82         		run;
+83         	%end;
+84         
+85         	* Combine all datasets with beta estimates into a single dataset;
+86         	data outparms;
+3                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+87         		set betas_mi_:;
+88         	run;
+89         
+90         	* obtain the maximum number of parameters ;
+91         	proc sql noprint;
+92         		select max(modelrhs) into:maxrhs from outparms;
+93         	quit;
+94         
+95         	* create variable list that includes all parameters;
+96         	%let vlist=;
+97         	%do i=1 %to &maxrhs.;
+98         		%let vlist=&vlist. Var&i.;
+99         	%end;
+100        
+101        	* Clean up the dataset for MIANALYZE ;
+102        	data outparms;
+103        		set outparms;
+104        		drop modelrhs procnum modelno;
+105        	run;
+106        
+107        	* Sort the dataset by imputation number ;
+108        	proc sort data=outparms;
+109        		by _imputation_;
+110        	run;
+111        
+112        	* Use MIANALYZE to obtain the final estimates ;
+113        	proc mianalyze parms=outparms;
+114        		modeleffects &vlist.;
+115        		ods output ParameterEstimates=betas_mi(keep=Parm Estimate StdErr tValue
+116        			Probt );
+117        	run;
+118        
+119        	* Clean up intermediate datasets ;
+120        	proc datasets library=work nolist;
+121        		delete outparms;
+122        	quit;
+123        
+124        	* end macro ;
+125        %mend GEE_SUDAAN;
+126        
+127        * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
+128        data data;
+129        	set &data.;
+130        	hh_id_num=input(substr(hh_id, 2),8.);
+131        run;
+
+NOTE: There were 492450 observations read from the data set CH_FOUR.SOL_MI_LONG.
+NOTE: The data set WORK.DATA has 492450 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.42 seconds
+      cpu time            0.11 seconds
+      
+
+132        
+133        * Call the GEE_SUDAAN macro to fit the model and obtain estimates ;
+134        %GEE_SUDAAN(data=data,
+135        	strata=strat,
+136        	psu=hh_id_num,
+4                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+137        	wt=weight_final_norm_overall,
+138        	response=sbp5,
+139        	covars=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time,
+140        	class= agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3,
+141        	class_ref= agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1);
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.04 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_1
+NOTE: The PROCEDURE REGRESS printed pages 1-11.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.67 seconds
+      cpu time            1.71 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_1.
+NOTE: The data set WORK.BETAS_MI_1 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.32 seconds
+      cpu time            0.06 seconds
+5                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_2
+NOTE: The PROCEDURE REGRESS printed pages 12-22.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.33 seconds
+      cpu time            1.87 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_2.
+NOTE: The data set WORK.BETAS_MI_2 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.06 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+6                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_3
+NOTE: The PROCEDURE REGRESS printed pages 23-33.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.34 seconds
+      cpu time            2.04 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_3.
+NOTE: The data set WORK.BETAS_MI_3 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.07 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+7                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_4
+NOTE: The PROCEDURE REGRESS printed pages 34-44.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.42 seconds
+      cpu time            1.96 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_4.
+NOTE: The data set WORK.BETAS_MI_4 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.07 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_5
+NOTE: The PROCEDURE REGRESS printed pages 45-55.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.50 seconds
+      cpu time            1.90 seconds
+      
+
+8                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_5.
+NOTE: The data set WORK.BETAS_MI_5 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.07 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_6
+NOTE: The PROCEDURE REGRESS printed pages 56-66.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.32 seconds
+      cpu time            1.82 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_6.
+NOTE: The data set WORK.BETAS_MI_6 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+9                                                          The SAS System                            15:48 Tuesday, October 21, 2025
+
+NOTE: DATA statement used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.06 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_7
+NOTE: The PROCEDURE REGRESS printed pages 67-77.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.35 seconds
+      cpu time            1.81 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_7.
+NOTE: The data set WORK.BETAS_MI_7 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.06 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+10                                                         The SAS System                            15:48 Tuesday, October 21, 2025
+
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_8
+NOTE: The PROCEDURE REGRESS printed pages 78-88.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.35 seconds
+      cpu time            1.85 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_8.
+NOTE: The data set WORK.BETAS_MI_8 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.06 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+11                                                         The SAS System                            15:48 Tuesday, October 21, 2025
+
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_9
+NOTE: The PROCEDURE REGRESS printed pages 89-99.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.44 seconds
+      cpu time            1.90 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_9.
+NOTE: The data set WORK.BETAS_MI_9 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 492450 observations read from the data set WORK.DATA.
+NOTE: The data set WORK.DB has 49245 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.06 seconds
+      
+
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 10 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2025.
+************************************************************
+ 
+ 
+ 
+ 
+WARNING:
+Your annual SUDAAN license has expired.  SUDAAN will stop executing on December 15, 2025.  Please contact the SUDAAN
+representative at your site to have your license renewed.  You may also call the SUDAAN Product Coordinator at 919-541-6602 or
+send e-mail to  SUDAAN@RTI.ORG for further assistance.
+ 
+ 
+ 
+Opened SAS data file DB for reading.
+ 
+NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
+Note:
+ 31 records written to file EST_MI_10
+NOTE: The PROCEDURE REGRESS printed pages 100-110.
+NOTE: PROCEDURE REGRESS used (Total process time):
+      real time           2.32 seconds
+12                                                         The SAS System                            15:48 Tuesday, October 21, 2025
+
+      cpu time            1.62 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.EST_MI_10.
+NOTE: The data set WORK.BETAS_MI_10 has 31 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_1.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_10.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_2.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_3.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_4.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_5.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_6.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_7.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_8.
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI_9.
+NOTE: The data set WORK.OUTPARMS has 310 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 310 observations read from the data set WORK.OUTPARMS.
+NOTE: The data set WORK.OUTPARMS has 310 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 310 observations read from the data set WORK.OUTPARMS.
+NOTE: The data set WORK.OUTPARMS has 310 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+13                                                         The SAS System                            15:48 Tuesday, October 21, 2025
+
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 8 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 9 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+14                                                         The SAS System                            15:48 Tuesday, October 21, 2025
+
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+NOTE: The data set WORK.BETAS_MI has 31 observations and 5 variables.
+NOTE: The PROCEDURE MIANALYZE printed pages 111-113.
+NOTE: PROCEDURE MIANALYZE used (Total process time):
+      real time           0.29 seconds
+      cpu time            0.03 seconds
+      
+
+NOTE: Deleting WORK.OUTPARMS (memtype=DATA).
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+142        
+143        * Print the final combined estimates ;
+144        proc print data=betas_mi;
+145        run;
+
+NOTE: There were 31 observations read from the data set WORK.BETAS_MI.
+NOTE: The PROCEDURE PRINT printed page 114.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+ERROR: Errors printed on page 1.
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           27.96 seconds
+      cpu time            19.57 seconds
+      
