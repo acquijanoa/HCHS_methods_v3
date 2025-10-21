@@ -24,14 +24,91 @@ proc format;
 run;
 
 
+%macro rhs_map(data=, covars=, class=, out=param_map);
+
+    /*-----------------------------------------------*
+     | Step 1: Get distinct levels for categorical vars
+     *-----------------------------------------------*/
+    proc sql noprint;
+        create table _levels as
+        %let i=1;
+        %let var=%scan(&class, &i);
+        %do %while("&var" ne "");
+            select distinct "&var" as Variable length=32,
+                   &var as Level
+            from &data
+            %let i=%eval(&i+1);
+            %let var=%scan(&class, &i);
+            %if "&var" ne "" %then union all;
+        %end;;
+    quit;
+
+    /*-----------------------------------------------*
+     | Step 2: Count number of levels per categorical
+     *-----------------------------------------------*/
+    proc sql;
+        create table _cat_counts as
+        select Variable, count(Level) as nlevels
+        from _levels
+        group by Variable;
+    quit;
+
+    /*-----------------------------------------------*
+     | Step 3: Build the RHS parameter map
+     *-----------------------------------------------*/
+    data &out;
+        length ParamName $60 Variable $32 Type $10;
+        retain RHS 1;
+
+        /* Intercept first */
+        RHS = 1;
+        ParamName = "Intercept";
+        Variable  = "";
+        Type = "Intercept";
+        output;
+
+        /* Add categorical variables (nlevels - 1) */
+        set _cat_counts end=last;
+        do i=1 to nlevels-1;
+            RHS + 1;
+            ParamName = cats(Variable, "_", put(i, z2.));
+            Type = "Class";
+            output;
+        end;
+        drop i;
+
+        /* Add numeric variables */
+        if last then do;
+            %let i=1;
+            %let var=%scan(&covars, &i);
+            %do %while("&var" ne "");
+                if upcase("&var") not in (select upcase(Variable) from _cat_counts) then do;
+                    RHS + 1;
+                    ParamName = "&var";
+                    Variable  = "&var";
+                    Type = "Numeric";
+                    output;
+                end;
+                %let i=%eval(&i+1);
+                %let var=%scan(&covars, &i);
+            %end;
+        end;
+    run;
+
+    /*-----------------------------------------------*
+     | Step 4: Cleanup temporary tables
+     *-----------------------------------------------*/
+    proc datasets lib=work nolist;
+        delete _levels _cat_counts;
+    quit;
+
+%mend rhs_map;
+
+
 
 %macro GEE_SUDAAN(nimpute=10, data=,strata=, psu=, wt=, formula=,class=, class_ref);
 
-
-
-	
-
-
+	* Loop over each imputed dataset ;
 %do j = 1 %to &nimpute.;
 	
 	%let j = 1;
