@@ -1,7 +1,8 @@
 * set home path;
 %let homepath=J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_simulation\Manual_V3;
 
-/*
+/*---------------------------------------------------------------------------------------
+
 Program: s1_sudaan_cont.sas
 
 Purpose: Fit a GEE model for continuous outcomes using SUDAAN's REGRESS procedure
@@ -17,7 +18,8 @@ with an indicator variable '_imputation_' to identify each imputed dataset.
 - The macro GEE_SUDAAN fits the GEE model for each imputed dataset and prepares the results for MIANALYZE.
 - Ensure that SUDAAN is properly installed and configured to run the REGRESS procedure.
 - Modify the macro call at the end of the script to specify the appropriate variables and dataset names.
- */
+
+---------------------------------------------------------------------------------------*/
 * Define libraries;
 libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS';
 
@@ -61,7 +63,8 @@ Outputs: Dataset 'betas_mi' containing combined parameter estimates suitable for
 			output beta sebeta / filename=est_mi_&j. filetype=sas replace;
 		run;
 
-		* obtain the number of levels for each categorical variable ;
+		* Prepare the estimates including imputation number and a categorical variable name as 
+			SUDAAN does not output variable names directly ;
 		data betas_mi_&j.;
 			set est_mi_&j.;
 			* add imputation number ;
@@ -77,8 +80,6 @@ Outputs: Dataset 'betas_mi' containing combined parameter estimates suitable for
 	data outparms;
 		set betas_mi_:;
 	run;
-
-	* Create a variable list for MIANALYZE ;
 
 	* obtain the maximum number of parameters ;
 	proc sql noprint;
