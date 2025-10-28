@@ -26,10 +26,8 @@ libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
 * Set macro variables ;
 %let data= ch_four.sol_mi_long ;
 
-
-
 /*
-Macro: GEE_SUDAAN
+Macro: REGRESS_MI
 
 Purpose: Fit a GEE model using SUDAAN's REGRESS procedure across multiple imputed datasets
 and prepare the results for MIANALYZE.
@@ -48,14 +46,17 @@ Arguments:
 Outputs: Dataset 'betas_mi' containing combined parameter estimates suitable for MIANALYZE.
 
  */
-%macro GEE_SUDAAN(data, strata, psu, wt, response, covars, class, class_ref, nimpute=10);
+%macro REGRESS_MI(data, strata, psu, wt, response, covars, class, class_ref, nimpute=10);
+
+	* Turn off all ODS printing before the procedure starts;
+	ods exclude all;
 
 	* Loop over each imputed dataset ;
 	%do j=1 %to &nimpute.;
 
 		data db;
 			set &data.;
-			
+			* subset input data to the j-th imputed sample;
 			if _imputation_ = &j. then output;
 		run;
 		
@@ -121,8 +122,10 @@ Outputs: Dataset 'betas_mi' containing combined parameter estimates suitable for
 		delete outparms;
 	quit;
 
+	* restore all ODS printing; 
+	ods include all;
 	* end macro ;
-%mend GEE_SUDAAN;
+%mend REGRESS_MI;
 
 * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
 data data;
@@ -130,8 +133,8 @@ data data;
 	hh_id_num=input(substr(hh_id, 2),8.);
 run;
 
-* Call the GEE_SUDAAN macro to fit the model and obtain estimates ;
-%GEE_SUDAAN(data=data, 
+* Call the REGRESS_MI macro to fit the model and obtain estimates ;
+%REGRESS_MI(data=data, 
 	strata=strat, 
 	psu=hh_id_num, 
 	wt=weight_final_norm_overall, 
