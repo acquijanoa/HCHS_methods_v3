@@ -21,92 +21,11 @@
 
 ---------------------------------------------------------------------------------------*/
 * Define libraries;
-libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
+libname ch_five 'J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS' access=readonly;
+%include "J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_methods_V3\scripts\GEE_MI.sas";
 
 * Set macro variables ;
-%let data= ch_four.sol_mi_long ;
-
-
-%macro RLOGIST_MI(data, strata, psu, wt, response, covars, class, class_ref, nimpute=10);
-
-	* Turn off all ODS printing before the procedure starts;
-	ods exclude all;
-
-	* Loop over each imputed dataset ;
-	%do j=1 %to &nimpute.;
-
-		data db;
-			set &data.;
-			* subset input data to the j-th imputed sample;
-			if _imputation_ = &j. then output;
-		run;
-		
-		* Fit the GEE model using REGRESS procedure in the j-th imputed dataset ;
-		proc regress data=db filetype=sas r=independent semethod=zeger notsorted;
-			nest &strata. &psu.;
-			weight &wt.;
-			class &class.;
-			model &response.=&covars.;
-			reflevel &class_ref.;
-			output beta sebeta / filename=est_mi_&j. filetype=sas replace;
-		run;
-
-		* Prepare the estimates including imputation number and a categorical variable name as 
-			SUDAAN does not output variable names directly ;
-		data betas_mi_&j.;
-			set est_mi_&j.;
-			* add imputation number ;
-			_imputation_=&j.;
-			* create variable names ;
-			parm=cats('Var',MODELRHS);
-			* rename estimates for MIANALYZE ;
-			rename beta=Estimate sebeta=StdErr;
-		run;
-	%end;
-
-	* Combine all datasets with beta estimates into a single dataset;
-	data outparms;
-		set betas_mi_:;
-	run;
-
-	* obtain the maximum number of parameters ;
-	proc sql noprint;
-		select max(modelrhs) into:maxrhs from outparms;
-	quit;
-
-	* create variable list that includes all parameters;
-	%let vlist=;
-	%do i=1 %to &maxrhs.;
-		%let vlist=&vlist. Var&i.;
-	%end;
-
-	* Clean up the dataset for MIANALYZE ;
-	data outparms;
-		set outparms;
-		drop modelrhs procnum modelno;
-	run;
-
-	* Sort the dataset by imputation number ;
-	proc sort data=outparms;
-		by _imputation_;
-	run;
-
-	* Use MIANALYZE to obtain the final estimates ;
-	proc mianalyze parms=outparms;
-		modeleffects &vlist.;
-		ods output ParameterEstimates=betas_mi(keep=Parm Estimate StdErr tValue
-			Probt );
-	run;
-
-	* Clean up intermediate datasets ;
-	proc datasets library=work nolist;
-		delete outparms;
-	quit;
-
-	* restore all ODS printing; 
-	ods include all;
-	* end macro ;
-%mend RLOGIST_MI;
+%let data= ch_five.sol_mi_long ;
 
 * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
 data data;
@@ -114,22 +33,13 @@ data data;
 	hh_id_num=input(substr(hh_id, 2),8.);
 run;
 
-%let db=data;
-%let covars=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time;
-%let class= agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3;
-%let response = sbp5;
-
-
 * Call the REGRESS_MI macro to fit the model and obtain estimates ;
-%RLOGIST_MI(data=data, 
+%GEE_MI(data=data, 
 	strata=strat, 
 	psu=hh_id_num, 
 	wt=weight_final_norm_overall, 
-	response=sbp5, 
+	response=hypertension2, 
 	covars=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time, 
 	class= agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3,
 	class_ref= agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1);
 
-* Print the final combined estimates ;
-proc print data=betas_mi;
-run;
