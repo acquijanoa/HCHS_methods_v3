@@ -1,4 +1,4 @@
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025   1
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025   1
 
  
  
@@ -21,7 +21,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759860\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765771\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -34,7 +34,7 @@ Multiple R-Square for the dependent variable SBP5: 0.284582
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -66,7 +66,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -101,7 +101,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -129,7 +129,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -148,7 +148,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -171,7 +171,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -199,7 +199,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -223,7 +223,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -280,7 +280,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -305,7 +305,7 @@ TIME                         0.41         0.02         0.37         0.44        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:20                                                                                                           Table: 1   
+Time: 15:22:51                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -334,7 +334,7 @@ EMPLOYED                      3         2.52     0.0564
 EDUCATION_C3                  2        24.21     0.0000                                                                             
 TIME                          1       547.28     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  12
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  12
 
  
  
@@ -357,7 +357,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759862\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765773\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -370,7 +370,7 @@ Multiple R-Square for the dependent variable SBP5: 0.280461
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -402,7 +402,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -437,7 +437,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -465,7 +465,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -484,7 +484,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -507,7 +507,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -535,7 +535,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -559,7 +559,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -616,7 +616,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -641,7 +641,7 @@ TIME                         0.36         0.02         0.33         0.39        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:22                                                                                                           Table: 1   
+Time: 15:22:53                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -670,7 +670,7 @@ EMPLOYED                      3         3.22     0.0218
 EDUCATION_C3                  2        25.37     0.0000                                                                             
 TIME                          1       526.17     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  23
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  23
 
  
  
@@ -693,7 +693,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759863\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765775\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -706,7 +706,7 @@ Multiple R-Square for the dependent variable SBP5: 0.284750
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -738,7 +738,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -773,7 +773,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -801,7 +801,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -820,7 +820,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -843,7 +843,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -871,7 +871,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -895,7 +895,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -952,7 +952,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -977,7 +977,7 @@ TIME                         0.39         0.02         0.36         0.42        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:23                                                                                                           Table: 1   
+Time: 15:22:55                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1006,7 +1006,7 @@ EMPLOYED                      3         1.54     0.2011
 EDUCATION_C3                  2        24.72     0.0000                                                                             
 TIME                          1       618.12     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  34
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  34
 
  
  
@@ -1029,7 +1029,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759865\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765777\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -1042,7 +1042,7 @@ Multiple R-Square for the dependent variable SBP5: 0.285362
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -1074,7 +1074,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -1109,7 +1109,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -1137,7 +1137,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -1156,7 +1156,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -1179,7 +1179,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -1207,7 +1207,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -1231,7 +1231,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1288,7 +1288,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1313,7 +1313,7 @@ TIME                         0.41         0.02         0.38         0.44        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:25                                                                                                           Table: 1   
+Time: 15:22:57                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1342,7 +1342,7 @@ EMPLOYED                      3         2.55     0.0541
 EDUCATION_C3                  2        18.40     0.0000                                                                             
 TIME                          1       619.75     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  45
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  45
 
  
  
@@ -1365,7 +1365,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759867\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765778\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -1378,7 +1378,7 @@ Multiple R-Square for the dependent variable SBP5: 0.283416
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -1410,7 +1410,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -1445,7 +1445,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -1473,7 +1473,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -1492,7 +1492,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -1515,7 +1515,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -1543,7 +1543,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -1567,7 +1567,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1624,7 +1624,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1649,7 +1649,7 @@ TIME                         0.39         0.02         0.36         0.42        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:27                                                                                                           Table: 1   
+Time: 15:22:58                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1678,7 +1678,7 @@ EMPLOYED                      3         2.05     0.1045
 EDUCATION_C3                  2        22.42     0.0000                                                                             
 TIME                          1       553.96     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  56
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  56
 
  
  
@@ -1701,7 +1701,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759868\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765780\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -1714,7 +1714,7 @@ Multiple R-Square for the dependent variable SBP5: 0.287119
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -1746,7 +1746,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -1781,7 +1781,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -1809,7 +1809,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -1828,7 +1828,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -1851,7 +1851,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -1879,7 +1879,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -1903,7 +1903,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1960,7 +1960,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -1985,7 +1985,7 @@ TIME                         0.41         0.02         0.38         0.44        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:28                                                                                                           Table: 1   
+Time: 15:23:00                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2014,7 +2014,7 @@ EMPLOYED                      3         2.19     0.0872
 EDUCATION_C3                  2        27.70     0.0000                                                                             
 TIME                          1       664.87     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  67
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  67
 
  
  
@@ -2037,7 +2037,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759870\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765782\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -2050,7 +2050,7 @@ Multiple R-Square for the dependent variable SBP5: 0.286470
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -2082,7 +2082,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -2117,7 +2117,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -2145,7 +2145,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -2164,7 +2164,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -2187,7 +2187,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -2215,7 +2215,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -2239,7 +2239,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2296,7 +2296,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2321,7 +2321,7 @@ TIME                         0.38         0.02         0.35         0.42        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:30                                                                                                           Table: 1   
+Time: 15:23:01                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2350,7 +2350,7 @@ EMPLOYED                      3         3.89     0.0086
 EDUCATION_C3                  2        28.68     0.0000                                                                             
 TIME                          1       553.08     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  78
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  78
 
  
  
@@ -2373,7 +2373,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759871\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765783\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -2386,7 +2386,7 @@ Multiple R-Square for the dependent variable SBP5: 0.277190
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -2418,7 +2418,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -2453,7 +2453,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -2481,7 +2481,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -2500,7 +2500,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -2523,7 +2523,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -2551,7 +2551,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -2575,7 +2575,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2632,7 +2632,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2657,7 +2657,7 @@ TIME                         0.41         0.02         0.38         0.44        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:31                                                                                                           Table: 1   
+Time: 15:23:03                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2686,7 +2686,7 @@ EMPLOYED                      3         1.19     0.3137
 EDUCATION_C3                  2        20.77     0.0000                                                                             
 TIME                          1       677.85     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025  89
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025  89
 
  
  
@@ -2709,7 +2709,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759873\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765785\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -2722,7 +2722,7 @@ Multiple R-Square for the dependent variable SBP5: 0.286404
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -2754,7 +2754,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -2789,7 +2789,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -2817,7 +2817,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -2836,7 +2836,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -2859,7 +2859,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -2887,7 +2887,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -2911,7 +2911,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2968,7 +2968,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -2993,7 +2993,7 @@ TIME                         0.40         0.02         0.37         0.43        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:33                                                                                                           Table: 1   
+Time: 15:23:05                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -3022,7 +3022,7 @@ EMPLOYED                      3         2.32     0.0736
 EDUCATION_C3                  2        21.38     0.0000                                                                             
 TIME                          1       598.75     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                           The SAS System                      13:44 Wednesday, October 29, 2025 100
+                                                           The SAS System                      15:22 Wednesday, October 29, 2025 100
 
  
  
@@ -3045,7 +3045,7 @@ Denominator degrees of freedom    :   9852
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761759875\DB.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1761765786\DB.SDN contains 9872 Clusters
 9872 clusters were used to fit the model
 Maximum cluster size is  42 records
 Minimum cluster size is   3 records
@@ -3058,7 +3058,7 @@ Multiple R-Square for the dependent variable SBP5: 0.285761
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  1   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -3090,7 +3090,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  2   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -3125,7 +3125,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  3   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -3153,7 +3153,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  4   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -3172,7 +3172,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  5   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -3195,7 +3195,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  6   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -3223,7 +3223,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  7   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -3247,7 +3247,7 @@ Ordered
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  8   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -3304,7 +3304,7 @@ Employment Status
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  9   
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -3329,7 +3329,7 @@ TIME                         0.41         0.02         0.38         0.44        
                                                                                                                                     
                                                                                                                                     
 Date: 10-29-2025                                               SUDAAN                                                    Page:  10  
-Time: 13:44:35                                                                                                           Table: 1   
+Time: 15:23:06                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
@@ -3358,11 +3358,12 @@ EMPLOYED                      3         5.18     0.0014
 EDUCATION_C3                  2        18.66     0.0000                                                                             
 TIME                          1       686.04     0.0000                                                                             
 -------------------------------------------------------                                                                             
-                                                 Pooled Beta Estimates using SUDAAN            13:44 Wednesday, October 29, 2025 111
+                                                 Pooled Beta Estimates using SUDAAN            15:22 Wednesday, October 29, 2025 111
 
                                               Class
                            Variable            Val         Estimate          StdErr     tValue     Probt
 
+                            INTERCEPT           .        128.113806        1.162781     110.18    <.0001
                            AGEGROUP_C6          1        -27.237640        0.891231     -30.56    <.0001
                            AGEGROUP_C6          2        -24.900034        0.878139     -28.36    <.0001
                            AGEGROUP_C6          3        -19.653613        0.904229     -21.74    <.0001
@@ -3388,7 +3389,6 @@ TIME                          1       686.04     0.0000
                            EMPLOYED             2         -0.490358        0.920357      -0.53    0.5963
                            EMPLOYED             3         -0.684703        0.961289      -0.71    0.4794
                            EMPLOYED             4          0.229406        0.912882       0.25    0.8025
-                           INTERCEPT            .        128.113806        1.162781     110.18    <.0001
                            SEX                  0                 0               0        .       .    
                            SEX                  1          5.546536        0.318894      17.39    <.0001
                            TIME                 .          0.397621        0.023166      17.16    <.0001

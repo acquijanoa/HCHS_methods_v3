@@ -43,23 +43,17 @@ Dependencies:
 	* Loop over each imputed dataset ;
 	%do j=1 %to &nimpute.;
 
-	data db;
-		set &data.;
-		* subset input data to the j-th imputed sample;
-		if _imputation_ = &j. then output;
-	run;
-		
+		data db;
+			set &data.(where=(_imputation_ = &j.));
+		run;	
 		* Fit the GEE model using REGRESS or RLOGIST procedure accordingly ;
 		%if &n_cats = 1 %then %do;
 		 %put ERROR: Review the response variable before continuing.;
 		 %abort cancel;
 		%end;
-		%else %if &n_cats. = 2 %then %do;
-		 proc rlogist data=db filetype=sas r=independent semethod=zeger notsorted;
-		%end;
-		%else %if &n_cats. > 2 %then %do;
-		 proc regress data=db filetype=sas r=independent semethod=zeger notsorted;
-		%end;
+		%else %if &n_cats. = 2 %then proc rlogist;
+		%else %if &n_cats. > 2 %then proc regress;
+			data=db filetype=sas r=independent semethod=zeger notsorted;
 			nest &strata. &psu.;
 			weight &wt.;
 			class &class.;
@@ -148,7 +142,7 @@ Dependencies:
 	/* Initialize output dataset */
 	data data_out;
 		length Variable $32 ClassVal 8;
-		Variable = "Intercept";
+		Variable = " Intercept";
 		ClassVal = .;
 		output;
 	run;
