@@ -278,27 +278,7 @@ Employment Status
   1                          0.00         0.00         0.00         0.00          .        .                                        
   2                          0.21         1.25        -2.24         2.66         0.17     0.8647                                    
   3                         -0.97         1.27        -3.47         1.52        -0.76     0.4445                                    
-  4                          0.85         1.24        -1.58         3.27         0.69     0.4931                                    
-------------------------------------------------------------------------------------------------                                    
-                                                                                                                                    
-                                                                                                                                    
-                                                                                                                                    
-Date: 11-04-2025                                               SUDAAN                                                    Page:  9   
-Time: 17:17:47                                                                                                           Table: 1   
-                                                                                                                                    
-Variance Estimation Method: Taylor Series (WR)                                                                                      
-SE Method: Robust (Zeger-Liang, 1986)                                                                                               
-Working Correlations: Independent                                                                                                   
-Link Function: Identity                                                                                                             
-Response variable SBP5: SBP5                                                                                                        
-For Subpopulation: PARTICIPANT_EXAMONLY_V3 = 1                                                                                      
-by: Independent Variables and Effects.                                                                                              
-                                                                                                                                    
-------------------------------------------------------------------------------------------------                                    
-Independent                                                                             P-value                                     
-  Variables and        Beta                      Lower 95%    Upper 95%                 T-Test                                      
-  Effects              Coeff.          SE Beta   Limit Beta   Limit Beta   T-Test B=0   B=0                                         
-------------------------------------------------------------------------------------------------                                    
+  4                          0.85         1.24        -1.58         3.27         0.69     0.4931                                                                     
 Education Status (3                                                                                                                 
   levels)                                                                                                                           
   1                          0.00         0.00         0.00         0.00          .        .                                        
