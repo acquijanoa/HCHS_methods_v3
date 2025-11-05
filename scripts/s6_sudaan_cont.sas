@@ -11,7 +11,7 @@
 
 ---------------------------------------------------------------------------------------*/
 * Define libraries;
-libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS' access=readonly;
+libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
 
 * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
 data db_ipw_byvisit;
@@ -21,11 +21,11 @@ data db_ipw_byvisit;
 run;
 
 * Fit SUDAAN analysis; 
-proc rlogist data=db_ipw_byvisit filetype=sas r=independent semethod=zeger notsorted;
+proc regress data=db_ipw_byvisit filetype=sas r=independent semethod=zeger notsorted;
 	nest strat hh_id_num;
 	weight weight_ipw_by_visit;
 	class agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3;
-	model hypertension2 = bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time;
+	model sbp5 = bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time;
 	reflevel agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1;
 	setenv labwidth=25 decwidth=3;
 	print beta="Estimate" sebeta="(S.E)" t_beta="t value" p_beta="p-value";

@@ -11,15 +11,15 @@ Automates the fitting of GEE models (PROC REGRESS) across multiple imputations
 and combines estimates using PROC MIANALYZE.
 
 Arguments:
-data:       Input dataset with multiply imputed data.
-strata:     Stratification variable for the survey design.
-psu:        Primary sampling unit variable.
-weight:     Sampling weight variable.
-response:   Outcome variable (binary or continuous).
-covars:     List of covariates.
-class:      Categorical predictor variables.
-class_ref:  Reference levels for class variables.
-nimpute:    Number of imputations. Default = 10.
+	data:       Input dataset with multiply imputed data.
+	strata:     Stratification variable for the survey design.
+	psu:        Primary sampling unit variable.
+	weight:     Sampling weight variable.
+	response:   Outcome variable (binary or continuous).
+	covars:     List of covariates.
+	class:      Categorical predictor variables.
+	class_ref:  Reference levels for class variables.
+	nimpute:    Number of imputations. Default = 10.
 
 Return:
 The macro prints a table with estimates but user can accesso to the
@@ -29,7 +29,7 @@ Dependencies:
 Requires SUDAAN and SAS
 
  *********************************************************************************************/
-%macro GEE_MI(data, strata, psu, wt, response, covars, class, class_ref,
+%macro GEE_MI(data, strata, psu, weight, response, covars, class, class_ref,
 	nimpute=10);
 
 	* Turn off all ODS printing before the procedure starts;
@@ -46,7 +46,7 @@ Requires SUDAAN and SAS
 		proc regress data=db filetype=sas r=independent semethod=zeger
 			notsorted;
 			nest &strata. &psu.;
-			weight &wt.;
+			weight &weight.;
 			class &class.;
 			model &response.=&covars.;
 			reflevel &class_ref.;

@@ -1,9 +1,5 @@
-1                                                          The SAS System                          15:22 Wednesday, October 29, 2025
+1                                                          The SAS System                          11:15 Wednesday, November 5, 2025
 
-ERROR: Expecting page 1, got page -1 instead.
-ERROR: Page validation error while reading SASUSER.PROFILE.CATALOG.
-NOTE: Unable to open SASUSER.PROFILE. WORK.PROFILE will be opened instead.
-NOTE: All profile changes will be lost at the end of the session.
 NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
       Licensed to UNIVERSITY OF NORTH CAROLINA CHAPEL HILL - SFA T&R, Site 70022629.
@@ -24,77 +20,59 @@ NOTE: Additional host information:
  W32_10PRO WIN 10.0.22621  Workstation
 
 NOTE: SAS initialization used:
-      real time           0.15 seconds
-      cpu time            0.09 seconds
+      real time           0.21 seconds
+      cpu time            0.10 seconds
       
-1          * set home path;
-2          %let homepath=J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_simulation\Manual_V3;
-3          
-4          /*---------------------------------------------------------------------------------------
-5          
-6          Program: s1_sudaan_cont.sas
+1          /*---------------------------------------------------------------------------------------
+2          
+3          	Program: s1_sudaan_cont.sas
+4          
+5          	Purpose: Fit a GEE model for continuous outcomes using SUDAAN's REGRESS procedure
+6          	across multiple imputed datasets and combine the results using MIANALYZE.
 7          
-8          Purpose: Fit a GEE model for continuous outcomes using SUDAAN's REGRESS procedure
-9          across multiple imputed datasets and combine the results using MIANALYZE.
-10         
-11         Author: Quijano-Angarita, A..
-12         
-13         Date: October 21, 2025
-14         
-15         Notes:
-16         - This script assumes that the imputed datasets are stored in a single dataset
-17         with an indicator variable '_imputation_' to identify each imputed dataset.
-18         - The macro GEE_SUDAAN fits the GEE model for each imputed dataset and prepares the results for MIANALYZE.
-19         - Ensure that SUDAAN is properly installed and configured to run the REGRESS procedure.
-20         - Modify the macro call at the end of the script to specify the appropriate variables and dataset names.
-21         
-22         ---------------------------------------------------------------------------------------*/
-23         * Define libraries;
-24         libname ch_four 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
-NOTE: Libref CH_FOUR was successfully assigned as follows: 
+8          	Author: Quijano-Angarita, A..
+9          
+10         	Date: October 21, 2025
+11         
+12         ---------------------------------------------------------------------------------------*/
+13         * Define libraries;
+14         libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
+NOTE: Libref LIB was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS
-25         %include "J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_methods_V3\scripts\GEE_MI.sas";
-226        
-227        * Set macro variables ;
-228        %let data= ch_four.sol_mi_long ;
-2                                                          The SAS System                          15:22 Wednesday, October 29, 2025
+15         %include "J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_methods_V3\scripts\GEE_MI.sas";
+214        
+215        * Use a DATA statement to convert hh_id to a numerical variable for SUDAAN;
+216        data db_sudaan_mi;
+217        	set lib.sol_mi_long;
+218        	hh_id_num=input(substr(hh_id, 2),8.);
+219        run;
 
-229        
-230        * Use a DATA statement to convert hh_id to a numerical variable for SUDAAN;
-231        data data;
-232        	set &data.;
-233        	hh_id_num=input(substr(hh_id, 2),8.);
-234        run;
-
-NOTE: There were 492450 observations read from the data set CH_FOUR.SOL_MI_LONG.
-NOTE: The data set WORK.DATA has 492450 observations and 35 variables.
+NOTE: There were 492450 observations read from the data set LIB.SOL_MI_LONG.
+NOTE: The data set WORK.DB_SUDAAN_MI has 492450 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.30 seconds
-      cpu time            0.04 seconds
+      real time           1.43 seconds
+      cpu time            0.11 seconds
       
 
-235        
-236        * Call the REGRESS_MI macro to fit the model and obtain estimates ;
-237        %GEE_MI(data=data,
-238        	strata=strat,
-239        	psu=hh_id_num,
-240        	wt=weight_final_norm_overall,
-241        	response=sbp5,
-242        	covars=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time,
-243        	class= agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3,
-244        	class_ref= agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1);
-NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.20 seconds
-      cpu time            0.18 seconds
-      
+220        
+221        * Call the REGRESS_MI macro to fit the model and obtain estimates ;
+222        %GEE_MI(data=db_sudaan_mi,
+2                                                          The SAS System                          11:15 Wednesday, November 5, 2025
 
+223        	strata=strat,
+224        	psu=hh_id_num,
+225        	weight=weight_final_norm_overall,
+226        	response=sbp5,
+227        	covars=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time,
+228        	class= agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3,
+229        	class_ref= agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1);
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=1;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.07 seconds
+      real time           0.10 seconds
       cpu time            0.06 seconds
       
 
@@ -118,29 +96,29 @@ Note:
  31 records written to file EST_MI_1
 NOTE: The PROCEDURE REGRESS printed pages 1-11.
 NOTE: PROCEDURE REGRESS used (Total process time):
-3                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
-      real time           1.64 seconds
-      cpu time            1.23 seconds
+      real time           2.92 seconds
+      cpu time            1.51 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_1.
 NOTE: The data set WORK.BETAS_MI_1 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.02 seconds
+      real time           0.04 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=2;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.48 seconds
-      cpu time            0.04 seconds
+      real time           0.28 seconds
+      cpu time            0.09 seconds
       
 
+
+3                                                          The SAS System                          11:15 Wednesday, November 5, 2025
 
  
 ************************************************************
@@ -161,27 +139,25 @@ Note:
  31 records written to file EST_MI_2
 NOTE: The PROCEDURE REGRESS printed pages 12-22.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.50 seconds
-      cpu time            1.14 seconds
+      real time           1.99 seconds
+      cpu time            1.71 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_2.
 NOTE: The data set WORK.BETAS_MI_2 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.04 seconds
+      real time           0.02 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=3;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-4                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
-      real time           0.21 seconds
-      cpu time            0.04 seconds
+      real time           0.08 seconds
+      cpu time            0.06 seconds
       
 
 
@@ -202,26 +178,28 @@ Opened SAS data file DB for reading.
 NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
 Note:
  31 records written to file EST_MI_3
+4                                                          The SAS System                          11:15 Wednesday, November 5, 2025
+
 NOTE: The PROCEDURE REGRESS printed pages 23-33.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.48 seconds
-      cpu time            1.12 seconds
+      real time           2.06 seconds
+      cpu time            1.57 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_3.
 NOTE: The data set WORK.BETAS_MI_3 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.02 seconds
+      real time           0.00 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=4;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.18 seconds
+      real time           0.09 seconds
       cpu time            0.04 seconds
       
 
@@ -238,8 +216,6 @@ This license expires on October 16, 2026.
  
  
  
-5                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
 Opened SAS data file DB for reading.
  
 NOTE: SUDAAN sorted the main data set DB by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
@@ -247,25 +223,27 @@ Note:
  31 records written to file EST_MI_4
 NOTE: The PROCEDURE REGRESS printed pages 34-44.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.47 seconds
-      cpu time            1.23 seconds
+      real time           1.91 seconds
+      cpu time            1.54 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_4.
 NOTE: The data set WORK.BETAS_MI_4 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.01 seconds
+      real time           0.01 seconds
+      cpu time            0.00 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=5;
+5                                                          The SAS System                          11:15 Wednesday, November 5, 2025
+
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.07 seconds
-      cpu time            0.04 seconds
+      real time           0.11 seconds
+      cpu time            0.06 seconds
       
 
 
@@ -288,27 +266,25 @@ Note:
  31 records written to file EST_MI_5
 NOTE: The PROCEDURE REGRESS printed pages 45-55.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.48 seconds
-      cpu time            1.18 seconds
+      real time           2.01 seconds
+      cpu time            1.73 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_5.
 NOTE: The data set WORK.BETAS_MI_5 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
+      real time           0.02 seconds
       cpu time            0.00 seconds
-6                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=6;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.06 seconds
-      cpu time            0.04 seconds
+      real time           0.07 seconds
+      cpu time            0.07 seconds
       
 
 
@@ -322,6 +298,8 @@ This license expires on October 16, 2026.
 ************************************************************
  
  
+6                                                          The SAS System                          11:15 Wednesday, November 5, 2025
+
  
  
 Opened SAS data file DB for reading.
@@ -331,25 +309,25 @@ Note:
  31 records written to file EST_MI_6
 NOTE: The PROCEDURE REGRESS printed pages 56-66.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.52 seconds
-      cpu time            1.12 seconds
+      real time           2.04 seconds
+      cpu time            1.57 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_6.
 NOTE: The data set WORK.BETAS_MI_6 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
+      real time           0.01 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=7;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.06 seconds
-      cpu time            0.03 seconds
+      real time           0.08 seconds
+      cpu time            0.06 seconds
       
 
 
@@ -358,8 +336,6 @@ NOTE: DATA statement used (Total process time):
 SUDAAN Release 11.0.3, Build 331
 SAS-Callable, Individual PC, 32 bit version
 Serial Number A0004505 for 5 user(s) is licensed to
-7                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
 UNC-CH (CSCC).
 This license expires on October 16, 2026.
 ************************************************************
@@ -374,24 +350,26 @@ Note:
  31 records written to file EST_MI_7
 NOTE: The PROCEDURE REGRESS printed pages 67-77.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.47 seconds
-      cpu time            1.17 seconds
+      real time           2.05 seconds
+      cpu time            1.61 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_7.
 NOTE: The data set WORK.BETAS_MI_7 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
+7                                                          The SAS System                          11:15 Wednesday, November 5, 2025
+
+      real time           0.02 seconds
+      cpu time            0.01 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=8;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.06 seconds
+      real time           0.09 seconds
       cpu time            0.06 seconds
       
 
@@ -415,33 +393,33 @@ Note:
  31 records written to file EST_MI_8
 NOTE: The PROCEDURE REGRESS printed pages 78-88.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.53 seconds
-      cpu time            1.15 seconds
+      real time           2.13 seconds
+      cpu time            1.65 seconds
       
-8                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_8.
 NOTE: The data set WORK.BETAS_MI_8 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.01 seconds
+      real time           0.01 seconds
+      cpu time            0.00 seconds
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=9;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.06 seconds
-      cpu time            0.06 seconds
+      real time           0.07 seconds
+      cpu time            0.04 seconds
       
 
 
  
 ************************************************************
 SUDAAN Release 11.0.3, Build 331
+8                                                          The SAS System                          11:15 Wednesday, November 5, 2025
+
 SAS-Callable, Individual PC, 32 bit version
 Serial Number A0004505 for 5 user(s) is licensed to
 UNC-CH (CSCC).
@@ -458,8 +436,8 @@ Note:
  31 records written to file EST_MI_9
 NOTE: The PROCEDURE REGRESS printed pages 89-99.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.57 seconds
-      cpu time            1.26 seconds
+      real time           2.16 seconds
+      cpu time            1.61 seconds
       
 
 
@@ -471,15 +449,13 @@ NOTE: DATA statement used (Total process time):
       
 
 
-NOTE: There were 49245 observations read from the data set WORK.DATA.
+NOTE: There were 49245 observations read from the data set WORK.DB_SUDAAN_MI.
       WHERE _imputation_=10;
 NOTE: The data set WORK.DB has 49245 observations and 35 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.06 seconds
+      real time           0.07 seconds
       cpu time            0.04 seconds
       
-9                                                          The SAS System                          15:22 Wednesday, October 29, 2025
-
 
 
  
@@ -501,15 +477,17 @@ Note:
  31 records written to file EST_MI_10
 NOTE: The PROCEDURE REGRESS printed pages 100-110.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.53 seconds
-      cpu time            1.14 seconds
+      real time           2.07 seconds
+9                                                          The SAS System                          11:15 Wednesday, November 5, 2025
+
+      cpu time            1.73 seconds
       
 
 
 NOTE: There were 31 observations read from the data set WORK.EST_MI_10.
 NOTE: The data set WORK.BETAS_MI_10 has 31 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.01 seconds
+      real time           0.08 seconds
       cpu time            0.00 seconds
       
 
@@ -526,20 +504,18 @@ NOTE: There were 31 observations read from the data set WORK.BETAS_MI_8.
 NOTE: There were 31 observations read from the data set WORK.BETAS_MI_9.
 NOTE: The data set WORK.OUTPARMS has 310 observations and 7 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.01 seconds
-      cpu time            0.00 seconds
+      real time           0.02 seconds
+      cpu time            0.01 seconds
       
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.00 seconds
+      real time           0.01 seconds
       cpu time            0.00 seconds
       
 
 
 NOTE: There were 310 observations read from the data set WORK.OUTPARMS.
 NOTE: The data set WORK.OUTPARMS has 310 observations and 4 variables.
-10                                                         The SAS System                          15:22 Wednesday, October 29, 2025
-
 NOTE: DATA statement used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -562,44 +538,44 @@ WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in th
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 1 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
-WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
-11                                                         The SAS System                          15:22 Wednesday, October 29, 2025
+10                                                         The SAS System                          11:15 Wednesday, November 5, 2025
 
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 2 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 3 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 4 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 5 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 6 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
+WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 7 in the input PARMS= data set.
@@ -622,13 +598,15 @@ WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in t
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
+11                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
 WARNING: Within-imputation StdErr is zero for variable  in _Imputation_= 10 in the input PARMS= data set.
 NOTE: The data set WORK.BETAS_MI has 31 observations and 5 variables.
 NOTE: PROCEDURE MIANALYZE used (Total process time):
-      real time           0.02 seconds
-      cpu time            0.01 seconds
+      real time           0.05 seconds
+      cpu time            0.03 seconds
       
 
 NOTE: Deleting WORK.OUTPARMS (memtype=DATA).
@@ -648,7 +626,7 @@ NOTE: DATA statement used (Total process time):
 NOTE: The data set WORK._TEMP has 1 observations and 2 variables.
 NOTE: DATA statement used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
@@ -658,8 +636,6 @@ NOTE: 1 observations added.
 NOTE: The data set WORK.DATA_OUT has 2 observations and 2 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.01 seconds
-12                                                         The SAS System                          15:22 Wednesday, October 29, 2025
-
       cpu time            0.00 seconds
       
 
@@ -674,15 +650,17 @@ NOTE: PROCEDURE DATASETS used (Total process time):
 NOTE: There were 2 observations read from the data set WORK.DATA_OUT.
 NOTE: The data set WORK.DATA_OUT has 2 observations and 3 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.03 seconds
-      cpu time            0.00 seconds
+      real time           0.00 seconds
+      cpu time            0.01 seconds
       
 
 NOTE: Table WORK._TEMP created, with 6 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.19 seconds
-      cpu time            0.21 seconds
+      real time           0.24 seconds
+12                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
+      cpu time            0.26 seconds
       
 
 
@@ -714,11 +692,9 @@ NOTE: DATA statement used (Total process time):
 NOTE: Table WORK._TEMP created, with 7 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.31 seconds
-      cpu time            0.18 seconds
+      real time           1.23 seconds
+      cpu time            0.21 seconds
       
-
-13                                                         The SAS System                          15:22 Wednesday, October 29, 2025
 
 
 NOTE: Appending WORK._TEMP to WORK.DATA_OUT.
@@ -742,15 +718,17 @@ NOTE: PROCEDURE DATASETS used (Total process time):
 NOTE: There were 15 observations read from the data set WORK.DATA_OUT.
 NOTE: The data set WORK.DATA_OUT has 15 observations and 3 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
+13                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
+      real time           0.04 seconds
       cpu time            0.00 seconds
       
 
 NOTE: Table WORK._TEMP created, with 4 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.20 seconds
-      cpu time            0.15 seconds
+      real time           1.09 seconds
+      cpu time            0.26 seconds
       
 
 
@@ -775,17 +753,15 @@ NOTE: PROCEDURE DATASETS used (Total process time):
 NOTE: There were 19 observations read from the data set WORK.DATA_OUT.
 NOTE: The data set WORK.DATA_OUT has 19 observations and 3 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
+      real time           0.01 seconds
+      cpu time            0.01 seconds
       
-14                                                         The SAS System                          15:22 Wednesday, October 29, 2025
-
 
 NOTE: Table WORK._TEMP created, with 2 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.19 seconds
-      cpu time            0.15 seconds
+      real time           0.28 seconds
+      cpu time            0.26 seconds
       
 
 
@@ -802,6 +778,8 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 NOTE: Deleting WORK._TEMP (memtype=DATA).
 NOTE: PROCEDURE DATASETS used (Total process time):
+14                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
       real time           0.00 seconds
       cpu time            0.00 seconds
       
@@ -817,8 +795,8 @@ NOTE: DATA statement used (Total process time):
 NOTE: Table WORK._TEMP created, with 2 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.19 seconds
-      cpu time            0.14 seconds
+      real time           0.25 seconds
+      cpu time            0.20 seconds
       
 
 
@@ -829,7 +807,7 @@ NOTE: 2 observations added.
 NOTE: The data set WORK.DATA_OUT has 23 observations and 3 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.01 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
@@ -838,8 +816,6 @@ NOTE: PROCEDURE DATASETS used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
-15                                                         The SAS System                          15:22 Wednesday, October 29, 2025
-
 
 
 NOTE: There were 23 observations read from the data set WORK.DATA_OUT.
@@ -852,8 +828,8 @@ NOTE: DATA statement used (Total process time):
 NOTE: Table WORK._TEMP created, with 4 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.19 seconds
-      cpu time            0.15 seconds
+      real time           0.26 seconds
+      cpu time            0.26 seconds
       
 
 
@@ -862,6 +838,8 @@ WARNING: Variable Parm was not found on DATA file.
 NOTE: There were 4 observations read from the data set WORK._TEMP.
 NOTE: 4 observations added.
 NOTE: The data set WORK.DATA_OUT has 27 observations and 3 variables.
+15                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -878,15 +856,15 @@ NOTE: PROCEDURE DATASETS used (Total process time):
 NOTE: There were 27 observations read from the data set WORK.DATA_OUT.
 NOTE: The data set WORK.DATA_OUT has 27 observations and 3 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.05 seconds
+      real time           0.00 seconds
       cpu time            0.00 seconds
       
 
 NOTE: Table WORK._TEMP created, with 3 rows and 2 columns.
 
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           0.20 seconds
-      cpu time            0.17 seconds
+      real time           0.32 seconds
+      cpu time            0.32 seconds
       
 
 
@@ -896,10 +874,8 @@ NOTE: There were 3 observations read from the data set WORK._TEMP.
 NOTE: 3 observations added.
 NOTE: The data set WORK.DATA_OUT has 30 observations and 3 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-16                                                         The SAS System                          15:22 Wednesday, October 29, 2025
-
+      real time           0.05 seconds
+      cpu time            0.01 seconds
       
 
 
@@ -913,7 +889,7 @@ NOTE: PROCEDURE DATASETS used (Total process time):
 NOTE: There were 30 observations read from the data set WORK.DATA_OUT.
 NOTE: The data set WORK.DATA_OUT has 30 observations and 3 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
+      real time           0.06 seconds
       cpu time            0.00 seconds
       
 
@@ -921,7 +897,9 @@ NOTE: DATA statement used (Total process time):
 NOTE: The data set WORK._TEMP has 1 observations and 2 variables.
 NOTE: DATA statement used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
+16                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
       
 
 
@@ -931,7 +909,7 @@ NOTE: There were 1 observations read from the data set WORK._TEMP.
 NOTE: 1 observations added.
 NOTE: The data set WORK.DATA_OUT has 31 observations and 3 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
+      real time           0.01 seconds
       cpu time            0.00 seconds
       
 
@@ -946,7 +924,7 @@ NOTE: PROCEDURE DATASETS used (Total process time):
 NOTE: There were 31 observations read from the data set WORK.DATA_OUT.
 NOTE: The data set WORK.DATA_OUT has 31 observations and 3 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
+      real time           0.03 seconds
       cpu time            0.00 seconds
       
 
@@ -957,8 +935,6 @@ NOTE: PROCEDURE SORT used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
-
-17                                                         The SAS System                          15:22 Wednesday, October 29, 2025
 
 
 NOTE: There were 31 observations read from the data set WORK.DATA_OUT.
@@ -973,7 +949,7 @@ NOTE: There were 31 observations read from the data set WORK.DATA_OUT.
 NOTE: There were 31 observations read from the data set WORK.BETAS_MI.
 NOTE: The data set WORK.BETAS_OUT has 31 observations and 6 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.01 seconds
+      real time           0.02 seconds
       cpu time            0.00 seconds
       
 
@@ -981,7 +957,9 @@ NOTE: DATA statement used (Total process time):
 NOTE: There were 31 observations read from the data set WORK.BETAS_OUT.
 NOTE: The data set WORK.BETAS_OUT has 31 observations and 6 variables.
 NOTE: PROCEDURE SORT used (Total process time):
-      real time           0.00 seconds
+      real time           0.02 seconds
+17                                                         The SAS System                          11:15 Wednesday, November 5, 2025
+
       cpu time            0.00 seconds
       
 
@@ -996,12 +974,12 @@ NOTE: PROCEDURE PRINT used (Total process time):
       cpu time            0.01 seconds
       
 
-245        
+230        
 
-ERROR: Errors printed on pages 1,17.
+ERROR: Errors printed on page 17.
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
 NOTE: The SAS System used:
-      real time           20.64 seconds
-      cpu time            13.93 seconds
+      real time           29.20 seconds
+      cpu time            19.14 seconds
       
