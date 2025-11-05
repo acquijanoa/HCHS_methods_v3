@@ -51,6 +51,7 @@ Requires SUDAAN and SAS
 			model &response.=&covars.;
 			reflevel &class_ref.;
 			output beta sebeta / filename=est_mi_&j. filetype=sas replace;
+
 		run;
 
 		* Prepare the estimates including imputation number and a categorical variable name as 
@@ -60,6 +61,7 @@ Requires SUDAAN and SAS
 			_imputation_=&j.;
 			Parm=cats('V_',modelrhs);
 			rename beta=Estimate sebeta=StdErr;
+			format beta 12.4 sebeta 12.4;
 		run;
 	%end;
 
