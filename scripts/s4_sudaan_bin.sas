@@ -19,7 +19,7 @@ data db_bin_ipw;
 	hh_id_num=input(substr(hh_id, 2),8.);
 run;
 
-* Fit SUDAAN analysis;
+* Fit SUDAAN model;
 proc rlogist data=db_bin_ipw filetype=sas r=independent semethod=zeger
 	notsorted;
 	nest strat hh_id_num;

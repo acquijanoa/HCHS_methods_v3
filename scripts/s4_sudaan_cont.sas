@@ -16,11 +16,10 @@ libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
 * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
 data db_cont_ipw;
   set lib.sol_ipw_long ;
-  ;
   hh_id_num=input(substr(hh_id, 2),8.);
 run;
 
-* Fit SUDAAN analysis;
+* Call SUDAAN procedure;
 proc regress data=db_cont_ipw filetype=sas r=independent semethod=zeger
   notsorted;
   nest strat hh_id_num;
