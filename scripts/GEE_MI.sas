@@ -158,7 +158,7 @@ Requires SUDAAN and SAS
 					missing(&var.);
 			quit;
 
-			/* Append */
+			/* append */
 			proc append base=data_out data=_temp force;
 			run;
 
