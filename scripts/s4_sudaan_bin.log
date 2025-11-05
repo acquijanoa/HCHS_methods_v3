@@ -1,0 +1,123 @@
+1                                                          The SAS System                            17:12 Tuesday, November 4, 2025
+
+NOTE: Unable to open SASUSER.REGSTRY. WORK.REGSTRY will be opened instead.
+NOTE: All registry changes will be lost at the end of the session.
+
+WARNING: Unable to copy SASUSER registry to WORK registry. Because of this, you will not see registry customizations during this 
+         session.
+NOTE: Unable to open SASUSER.PROFILE. WORK.PROFILE will be opened instead.
+NOTE: All profile changes will be lost at the end of the session.
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
+      Licensed to UNIVERSITY OF NORTH CAROLINA CHAPEL HILL - SFA T&R, Site 70022629.
+NOTE: This session is executing on the W32_10PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 14.2
+      SAS/ETS 14.2
+      SAS/OR 14.2
+      SAS/IML 14.2
+      SAS/QC 14.2
+
+NOTE: Additional host information:
+
+ W32_10PRO WIN 10.0.22621  Workstation
+
+NOTE: SAS initialization used:
+      real time           4.98 seconds
+      cpu time            0.09 seconds
+      
+1          * set home path;
+2          %let homepath=J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_simulation\Manual_V3;
+3          
+4          /*---------------------------------------------------------------------------------------
+5          
+6          	Program: s4_sudaan_bin.sas
+7          
+8          	Purpose: Fit a GEE model for binary outcomes using SUDAAN's REGRESS procedure
+9          				restricted to V3
+10         
+11         	Author: Quijano-Angarita, A..
+12         
+13         	Date: October 28, 2025
+14         
+15         ---------------------------------------------------------------------------------------*/
+16         * Define libraries;
+17         libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS' access=readonly;
+NOTE: Libref LIB was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS
+18         
+19         * Set macro variables ;
+20         %let data= lib.sol_ipw_long ;
+21         
+22         proc contents data= &data.; run;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           4.40 seconds
+2                                                          The SAS System                            17:12 Tuesday, November 4, 2025
+
+      cpu time            0.03 seconds
+      
+NOTE: The PROCEDURE CONTENTS printed pages 1-2.
+
+23         
+24         * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
+25         data hypert_data;
+26         	set lib.sol_ipw_long ;
+27         
+28         	* Convert PSU to numerical id;
+29         	hh_id_num = input(substr(hh_id, 2),8.);
+30         run;
+
+NOTE: There were 49245 observations read from the data set LIB.SOL_IPW_LONG.
+NOTE: The data set WORK.HYPERT_DATA has 49245 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.54 seconds
+      cpu time            0.01 seconds
+      
+
+31         
+32         * Fit SUDAAN analysis;
+33         proc rlogist data=data filetype=sas r=independent semethod=zeger notsorted;
+34         			nest strat hh_id_num;
+35         			weight WEIGHT_EXAMONLY_IPW_V3;
+36         			subpopn PARTICIPANT_EXAMONLY_V3 = 1;
+37         			class agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3;
+38         			model hypertension2 = bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time;
+39         			reflevel agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1;
+40         			output beta sebeta / filename=estimates filetype=sas replace;
+41         run;
+
+ 
+************************************************************
+SUDAAN Release 11.0.3, Build 331
+SAS-Callable, Individual PC, 32 bit version
+Serial Number A0004505 for 5 user(s) is licensed to
+UNC-CH (CSCC).
+This license expires on October 16, 2026.
+************************************************************
+ 
+ 
+ 
+FILE ERROR
+:
+Unable to open SAS file DATA
+ 
+SUDAAN processing halted.
+NOTE: The PROCEDURE RLOGIST printed page 3.
+NOTE: PROCEDURE RLOGIST used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           10.04 seconds
+      cpu time            0.17 seconds
+3                                                          The SAS System                            17:12 Tuesday, November 4, 2025
+
+      

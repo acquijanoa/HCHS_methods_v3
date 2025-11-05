@@ -1,0 +1,96 @@
+                                                           The SAS System                        17:12 Tuesday, November 4, 2025   1
+
+                                                       The CONTENTS Procedure
+
+                           Data Set Name        LIB.SOL_IPW_LONG              Observations          49245
+                           Member Type          DATA                          Variables             39   
+                           Engine               V9                            Indexes               0    
+                           Created              10/22/2025 22:12:08           Observation Length    312  
+                           Last Modified        10/22/2025 22:12:08           Deleted Observations  0    
+                           Protection                                         Compressed            NO   
+                           Data Set Type                                      Sorted                NO   
+                           Label                                                                         
+                           Data Representation  WINDOWS_32                                               
+                           Encoding             wlatin1  Western (Windows)                               
+
+
+                                                 Engine/Host Dependent Information
+
+                      Data Set Page Size          65536                                                      
+                      Number of Data Set Pages    236                                                        
+                      First Data Page             1                                                          
+                      Max Obs per Page            209                                                        
+                      Obs in First Data Page      190                                                        
+                      Number of Data Set Repairs  0                                                          
+                      ExtendObsCounter            YES                                                        
+                      Filename                    J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS\sol_ipw_long.sas7bdat
+                      Release Created             9.0401M4                                                   
+                      Host Created                W32_10PRO                                                  
+                      Owner Name                  CSCC\beibo                                                 
+                      File Size                   15MB                                                       
+                      File Size (bytes)           15532032                                                   
+
+
+                                            Alphabetic List of Variables and Attributes
+ 
+ # Variable                Type Len Format  Label
+
+ 9 AGEGROUP_C6             Num    8         6-level Age Sub-groups                                                                 
+27 BKGRD1_C7NOMISS         Num    8                                                                                                
+37 BMI                     Num    8                                                                                                
+ 6 BMI_V1                  Num    8         BMI (kg/m2)                                                                            
+17 BMI_V2                  Num    8         Body Mass Index (kg/m2) at Visit 2                                                     
+23 BMI_V3                  Num    8         Body Mass Index (kg/m2) at Visit 3                                                     
+10 CENTERNUM               Num    8         Participant's Field Center - numeric                                                   
+11 EDUCATION_C3            Num    8         Education Status (3 levels)                                                            
+ 7 EMPLOYED                Num    8         Employment Status (includes retirees)                                                  
+12 HH_ID                   Char   8         Masked HH ID                                                                           
+ 8 HYPERTENSION2           Num    8         Hypertension using NHANES definition                                                   
+18 HYPERTENSION2_V2        Num    8         Hypertension using NHANES definition at Visit 2                                        
+24 HYPERTENSION2_V3        Num    8         Hypertension - NHANES, Visit 3                                                         
+ 1 ID                      Char   8         HCHS Participant ID                                                                    
+39 PARTICIPANT_BY_VISIT    Num    8                                                                                                
+21 PARTICIPANT_EXAMONLY_V3 Num    8         Participants with in-person exam component                                             
+28 PARTICIPANT_V2          Num    8                                                                                                
+ 3 PSU_ID                  Num    8         Primary Sampling Unit ID                                                               
+31 RR_V2                   Num    8                                                                                                
+32 RR_V3                   Num    8                                                                                                
+14 SBP5_V1                 Num    8         Average Systolic  (SBPA5)                                                              
+20 SBP5_V2                 Num    8 BEST12. average systolic                                                                       
+26 SBP5_V3                 Num    8 BEST12. Average Systolic                                                                       
+                                                           The SAS System                        17:12 Tuesday, November 4, 2025   2
+
+                                                       The CONTENTS Procedure
+
+                                            Alphabetic List of Variables and Attributes
+ 
+ # Variable                Type Len Format  Label
+
+13 SEX                     Num    8         Sex                                                                                    
+ 2 STRAT                   Num    8         Stratification Variable ID                                                             
+36 TIME                    Num    8                                                                                                
+ 5 US_BORN                 Num    8         Born in mainland US (50 States + DC)                                                   
+35 VISIT                   Num    8                                                                                                
+34 WEIGHT_EXAMONLY_IPW_V3  Num    8                                                                                                
+ 4 WEIGHT_FINAL_           Num    8         Overall Sample Normalized Census 2010 Calibrated Trimmed NonResponse                   
+   NORM_OVERALL                             Adjusted Final Weights - Year 1-3 (frozen as of 10/27/2011)                            
+38 WEIGHT_IPW_BY_VISIT     Num    8                                                                                                
+33 WEIGHT_IPW_V2           Num    8                                                                                                
+15 WEIGHT_NONRESP          Num    8         Non-response adjusted Weights - Year 1-3 (frozen as of 10/27/2011)                     
+25 WEIGHT_NORM_OVERALL_    Num    8         V3 Overall Normalized Census 2010 Calibrated Trimmed NonResponse                       
+   EXAMONLY_V3                              Adjusted Final Weights (frozen as of 09/2024)                                          
+16 WEIGHT_NORM_OVERALL_V2  Num    8         HCHS V2 Overall Normalized, Census 2010 Calibrated, Trimmed,                           
+                                            Nonresponse Adjusted Weights - (frozen as of 03/06/2018)                               
+19 YRS_BTWN_V1V2           Num    8         Elapsed time between visits 1 and 2 (yrs)                                              
+22 YRS_BTWN_V1V3           Num    8         Elapsed time between visits 1 and 3 (yrs)                                              
+29 lp_v2                   Num    8         Value of the Linear Predictor                                                          
+30 lp_v3                   Num    8         Value of the Linear Predictor                                                          
+                                                           The SAS System                        17:12 Tuesday, November 4, 2025   3
+
+ 
+ 
+                                  S U D A A N
+            Software for the Statistical Analysis of Correlated Data
+          Copyright       Research Triangle Institute       March 2018
+                                 Release 11.0.3
+ 
