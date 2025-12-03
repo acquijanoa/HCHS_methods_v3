@@ -11,7 +11,7 @@
 
 ---------------------------------------------------------------------------------------*/
 * Define libraries;
-libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER4\SAS' access=readonly;
+libname lib 'J:\HCHS\SC\Review\HC3001-HC4000\HC3322\CHAPTER4\SAS' access=readonly;
 %include "J:\HCHS\STATISTICS\GRAS\QAngarita\HCHS_methods_V3\scripts\GEE_MI.sas";
 
 * Use a DATA statement to convert hh_id to a numerical variable for SUDAAN;

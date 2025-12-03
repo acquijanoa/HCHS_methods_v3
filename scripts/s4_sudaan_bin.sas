@@ -11,7 +11,7 @@ Date: October 28, 2025
 
 ---------------------------------------------------------------------------------------*/
 * Define libraries;
-libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS' access=readonly;
+libname lib 'J:\HCHS\SC\Review\HC3001-HC4000\HC3322\CHAPTER5\SAS' access=readonly;
 
 * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
 data db_bin_ipw;

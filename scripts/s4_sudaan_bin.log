@@ -1,5 +1,12 @@
-1                                                          The SAS System                          11:55 Wednesday, November 5, 2025
+1                                                          The SAS System                          16:49 Wednesday, December 3, 2025
 
+NOTE: Unable to open SASUSER.REGSTRY. WORK.REGSTRY will be opened instead.
+NOTE: All registry changes will be lost at the end of the session.
+
+WARNING: Unable to copy SASUSER registry to WORK registry. Because of this, you will not see registry customizations during this 
+         session.
+NOTE: Unable to open SASUSER.PROFILE. WORK.PROFILE will be opened instead.
+NOTE: All profile changes will be lost at the end of the session.
 NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
       Licensed to UNIVERSITY OF NORTH CAROLINA CHAPEL HILL - SFA T&R, Site 70022629.
@@ -20,54 +27,58 @@ NOTE: Additional host information:
  W32_10PRO WIN 10.0.22621  Workstation
 
 NOTE: SAS initialization used:
-      real time           0.22 seconds
-      cpu time            0.09 seconds
+      real time           4.20 seconds
+      cpu time            0.07 seconds
       
 1          /*---------------------------------------------------------------------------------------
 2          
-3          	Program: s4_sudaan_bin.sas
+3          Program: s4_sudaan_bin.sas
 4          
-5          	Purpose: Fit a GEE model for binary outcomes using SUDAAN's REGRESS procedure
-6          				restricted to V3
+5          Purpose: Fit a GEE model for binary outcomes using SUDAAN's REGRESS procedure
+6          restricted to V3
 7          
-8          	Author: Quijano-Angarita, A..
+8          Author: Quijano-Angarita, A..
 9          
-10         	Date: October 28, 2025
+10         Date: October 28, 2025
 11         
 12         ---------------------------------------------------------------------------------------*/
 13         * Define libraries;
-14         libname lib 'J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS' access=readonly;
+14         libname lib 'J:\HCHS\SC\Review\HC3001-HC4000\HC3322\CHAPTER5\SAS' access=readonly;
 NOTE: Libref LIB was successfully assigned as follows: 
       Engine:        V9 
-      Physical Name: J:\HCHS\SC\Review\HC3322\CHAPTER5\SAS
+      Physical Name: J:\HCHS\SC\Review\HC3001-HC4000\HC3322\CHAPTER5\SAS
 15         
 16         * Use a DATA statment to convert hh_id to a numerical variable for SUDAAN;
 17         data db_bin_ipw;
 18         	set lib.sol_ipw_long ;
-19         	hh_id_num = input(substr(hh_id, 2),8.);
+19         	hh_id_num=input(substr(hh_id, 2),8.);
 20         run;
 
 NOTE: There were 49245 observations read from the data set LIB.SOL_IPW_LONG.
-NOTE: The data set WORK.DB_BIN_IPW has 49245 observations and 40 variables.
+NOTE: The data set WORK.DB_BIN_IPW has 49245 observations and 39 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.57 seconds
-      cpu time            0.06 seconds
+      real time           0.55 seconds
+2                                                          The SAS System                          16:49 Wednesday, December 3, 2025
+
+      cpu time            0.01 seconds
       
 
 21         
-22         * Fit SUDAAN analysis;
-23         proc rlogist data=db_bin_ipw filetype=sas r=independent semethod=zeger notsorted;
-24         	nest strat hh_id_num;
-2                                                          The SAS System                          11:55 Wednesday, November 5, 2025
-
-25         	weight weight_examonly_ipw_v3;
-26         	subpopn participant_examonly_v3 = 1;
-27         	class agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3;
-28         	model hypertension2 = bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed education_c3 time;
-29         	reflevel agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0 employed=1 education_c3=1;
-30         	setenv labwidth=25 decwidth=3;
-31         	print beta="Estimate" sebeta="(S.E)" t_beta="t value" p_beta="p-value";
-32         run;
+22         * Fit SUDAAN model;
+23         proc rlogist data=db_bin_ipw filetype=sas r=independent semethod=zeger
+24         	notsorted;
+25         	nest strat hh_id_num;
+26         	weight weight_examonly_ipw_v3;
+27         	subpopn participant_examonly_v3=1;
+28         	class agegroup_c6 bkgrd1_c7nomiss centernum sex us_born employed
+29         		education_c3;
+30         	model hypertension2=bmi agegroup_c6 bkgrd1_c7nomiss centernum sex us_born
+31         		employed education_c3 time;
+32         	reflevel agegroup_c6=6 bkgrd1_c7nomiss=3 centernum=4 sex=0 us_born=0
+33         		employed=1 education_c3=1;
+34         	setenv labwidth=25 decwidth=3;
+35         	print beta="Estimate" sebeta="(S.E)" t_beta="t value" p_beta="p-value";
+36         run;
 
  
 ************************************************************
@@ -86,12 +97,12 @@ Opened SAS data file DB_BIN_IPW for reading.
 NOTE: SUDAAN sorted the main data set DB_BIN_IPW by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
 NOTE: The PROCEDURE RLOGIST printed pages 1-10.
 NOTE: PROCEDURE RLOGIST used (Total process time):
-      real time           4.04 seconds
-      cpu time            1.46 seconds
+      real time           2.56 seconds
+      cpu time            1.47 seconds
       
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
 NOTE: The SAS System used:
-      real time           5.00 seconds
-      cpu time            1.62 seconds
+      real time           7.51 seconds
+      cpu time            1.56 seconds
       

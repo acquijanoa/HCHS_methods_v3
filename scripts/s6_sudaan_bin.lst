@@ -1,4 +1,4 @@
-                                                           The SAS System                      11:55 Wednesday, November 5, 2025   1
+                                                           The SAS System                      16:55 Wednesday, December 3, 2025   1
 
  
  
@@ -19,14 +19,14 @@ Number of non-zero responses : 13768
  
 Independence parameters have converged in 7 iterations.
  
-Number of observations read       :  37128    Weighted count:  1942632
-Observations used in the analysis :  35738    Weighted count:  1841679
+Number of observations read       :  36123    Weighted count:  1956884
+Observations used in the analysis :  35738    Weighted count:  1956471
 Denominator degrees of freedom    :   9852
  
  
 Maximum number of estimable parameters for the model is 24
  
-File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1762361756\DB_IPW_BYVISIT.SDN contains 9872 Clusters
+File C:\Users\ACQUIJ~1\AppData\Local\Temp\SUDTEMP1764798966\DB_IPW_BYVISIT.SDN contains 9872 Clusters
 9728 clusters were used to fit the model
 Maximum cluster size is  30 records
 Minimum cluster size is   1 records
@@ -34,14 +34,14 @@ Minimum cluster size is   1 records
  
 Sample and Population Counts for Response Variable HYPERTENSION2
 Based on observations used in the analysis
-0:  Sample Count    21970    Population Count   1178184
-1:  Sample Count    13768    Population Count    663495
+0:  Sample Count    21970    Population Count   1250615
+1:  Sample Count    13768    Population Count    705856
  
-R-Square for dependent variable HYPERTENSION2 (Cox & Snell, 1989): 0.305871
+R-Square for dependent variable HYPERTENSION2 (Cox & Snell, 1989): 0.309599
  
--2 * Normalized Log-Likelihood with Intercepts Only : 46714.66
--2 * Normalized Log-Likelihood Full Model           : 33666.80
-Approximate Chi-Square (-2 * Log-L Ratio)           : 13047.86
+-2 * Normalized Log-Likelihood with Intercepts Only : 46735.72
+-2 * Normalized Log-Likelihood Full Model           : 33495.39
+Approximate Chi-Square (-2 * Log-L Ratio)           : 13240.33
 Degrees of Freedom                                  :       23
  
 Note: The approximate Chi-Square is not adjusted for clustering.
@@ -49,8 +49,8 @@ Note: The approximate Chi-Square is not adjusted for clustering.
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  1   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  1   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: 6-level Age Sub-groups.                                                                                                         
@@ -61,28 +61,28 @@ by: 6-level Age Sub-groups.
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                  3177        1                                                                                                  
+  1                  3088        1                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                  4292        2                                                                                                  
+  2                  4150        2                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  3                  6680        3                                                                                                  
+  3                  6530        3                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  4                 11903        4                                                                                                  
+  4                 11658        4                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  5                  8211        5                                                                                                  
+  5                  7972        5                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  6                  2862        6                                                                                                  
+  6                  2724        6                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  2   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  2   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: BKGRD1_C7NOMISS.                                                                                                                
@@ -93,31 +93,31 @@ BKGRD1_C7NO-
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                  3327        0                                                                                                  
+  1                  3171        0                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                  3923        1                                                                                                  
+  2                  3860        1                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  3                  5313        2                                                                                                  
+  3                  5182        2                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  4                 14968        3                                                                                                  
+  4                 14666        3                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  5                  5866        4                                                                                                  
+  5                  5655        4                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  6                  2523        5                                                                                                  
+  6                  2464        5                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  7                  1208        6                                                                                                  
+  7                  1125        6                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  3   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  3   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Participant's Field Center - numeric.                                                                                           
@@ -130,22 +130,22 @@ Participant-
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                  8799        1                                                                                                  
+  1                  8390        1                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                  9749        2                                                                                                  
+  2                  9503        2                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  3                  9243        3                                                                                                  
+  3                  9059        3                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  4                  9337        4                                                                                                  
+  4                  9171        4                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  4   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  4   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Sex.                                                                                                                            
@@ -155,16 +155,16 @@ Sex             Frequency    Value
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                 23101        0                                                                                                  
+  1                 22442        0                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                 14024        1                                                                                                  
+  2                 13680        1                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  5   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  5   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Born in mainland US (50 States + DC).                                                                                           
@@ -178,16 +178,16 @@ Born in
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                 30991        0                                                                                                  
+  1                 30191        0                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                  6012        1                                                                                                  
+  2                  5858        1                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  6   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  6   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Employment Status (includes retirees).                                                                                          
@@ -200,22 +200,22 @@ Employment
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                  3388        1                                                                                                  
+  1                  3257        1                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                 14343        2                                                                                                  
+  2                 14041        2                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  3                  6302        3                                                                                                  
+  3                  6223        3                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  4                 12526        4                                                                                                  
+  4                 12295        4                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  7   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  7   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Frequencies and Values for CLASS Variables                                                                                          
 by: Education Status (3 levels).                                                                                                    
@@ -227,71 +227,71 @@ Education
 ----------------------------------                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  1                 13884        1                                                                                                  
+  1                 13477        1                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  2                  9341        2                                                                                                  
+  2                  9129        2                                                                                                  
 Ordered                                                                                                                             
   Position:                                                                                                                         
-  3                 13734        3                                                                                                  
+  3                 13425        3                                                                                                  
 ----------------------------------                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     
-Date: 11-05-2025                                               SUDAAN                                                    Page:  8   
-Time: 11:55:56                                                                                                           Table: 1   
+Date: 12-03-2025                                               SUDAAN                                                    Page:  8   
+Time: 16:56:06                                                                                                           Table: 1   
                                                                                                                                     
 Variance Estimation Method: Taylor Series (WR)                                                                                      
 SE Method: Robust (Zeger-Liang, 1986)                                                                                               
 Working Correlations: Independent                                                                                                   
 Link Function: Logit                                                                                                                
-Response variable HYPERTENSION2: Hypertension using NHANES definition                                                               
+Response variable HYPERTENSION2: HYPERTENSION2                                                                                      
 by: Independent Variables and Effects.                                                                                              
                                                                                                                                     
 ---------------------------------------------------------------------------                                                         
 Independent Variables and                                                                                                           
   Effects                     Estimate        (S.E)      t value    p-value                                                         
 ---------------------------------------------------------------------------                                                         
-Intercept                       -1.700        0.254       -6.681      0.000                                                         
-BMI                              0.064        0.005       11.747      0.000                                                         
+Intercept                       -1.674        0.256       -6.546      0.000                                                         
+BMI                              0.063        0.006       11.439      0.000                                                         
 6-level Age Sub-groups                                                                                                              
-  1                             -4.469        0.312      -14.300      0.000                                                         
-  2                             -3.588        0.233      -15.401      0.000                                                         
-  3                             -2.371        0.202      -11.763      0.000                                                         
-  4                             -1.376        0.194       -7.082      0.000                                                         
-  5                             -0.652        0.193       -3.383      0.001                                                         
+  1                             -4.490        0.314      -14.287      0.000                                                         
+  2                             -3.598        0.237      -15.211      0.000                                                         
+  3                             -2.366        0.204      -11.613      0.000                                                         
+  4                             -1.374        0.196       -6.999      0.000                                                         
+  5                             -0.657        0.195       -3.374      0.001                                                         
   6                              0.000        0.000         .          .                                                            
 BKGRD1_C7NOMISS                                                                                                                     
-  0                              0.716        0.209        3.422      0.001                                                         
-  1                              0.007        0.151        0.046      0.963                                                         
-  2                              0.313        0.175        1.783      0.075                                                         
+  0                              0.711        0.213        3.335      0.001                                                         
+  1                              0.019        0.151        0.126      0.900                                                         
+  2                              0.323        0.176        1.834      0.067                                                         
   3                              0.000        0.000         .          .                                                            
-  4                              0.657        0.202        3.255      0.001                                                         
-  5                             -0.238        0.164       -1.448      0.148                                                         
-  6                              0.327        0.276        1.183      0.237                                                         
+  4                              0.654        0.201        3.245      0.001                                                         
+  5                             -0.235        0.165       -1.423      0.155                                                         
+  6                              0.312        0.288        1.080      0.280                                                         
 Participant's Field                                                                                                                 
   Center - numeric                                                                                                                  
-  1                             -0.250        0.204       -1.227      0.220                                                         
-  2                             -0.061        0.114       -0.537      0.591                                                         
-  3                              0.485        0.168        2.893      0.004                                                         
+  1                             -0.250        0.206       -1.213      0.225                                                         
+  2                             -0.060        0.114       -0.522      0.602                                                         
+  3                              0.489        0.168        2.919      0.004                                                         
   4                              0.000        0.000         .          .                                                            
 Sex                                                                                                                                 
   0                              0.000        0.000         .          .                                                            
-  1                              0.278        0.082        3.411      0.001                                                         
+  1                              0.278        0.082        3.378      0.001                                                         
 Born in mainland US (50                                                                                                             
   States + DC)                                                                                                                      
   0                              0.000        0.000         .          .                                                            
-  1                             -0.131        0.130       -1.007      0.314                                                         
+  1                             -0.105        0.132       -0.795      0.426                                                         
 Employment Status                                                                                                                   
   (includes retirees)                                                                                                               
   1                              0.000        0.000         .          .                                                            
-  2                              0.024        0.168        0.142      0.887                                                         
-  3                             -0.273        0.177       -1.538      0.124                                                         
-  4                             -0.144        0.166       -0.869      0.385                                                         
+  2                              0.033        0.170        0.195      0.845                                                         
+  3                             -0.278        0.180       -1.543      0.123                                                         
+  4                             -0.134        0.167       -0.803      0.422                                                         
 Education Status (3                                                                                                                 
   levels)                                                                                                                           
   1                              0.000        0.000         .          .                                                            
-  2                             -0.085        0.100       -0.852      0.395                                                         
-  3                             -0.181        0.098       -1.839      0.066                                                         
-TIME                             0.110        0.010       11.458      0.000                                                         
+  2                             -0.088        0.101       -0.866      0.387                                                         
+  3                             -0.188        0.100       -1.884      0.060                                                         
+TIME                             0.108        0.010       11.224      0.000                                                         
 ---------------------------------------------------------------------------                                                         
