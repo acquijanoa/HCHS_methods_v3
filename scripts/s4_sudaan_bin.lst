@@ -295,28 +295,7 @@ Employment Status
 Education Status (3                                                                                                                 
   levels)                                                                                                                           
   1                              0.000        0.000         .          .                                                            
-  2                             -0.115        0.099       -1.163      0.245                                                         
----------------------------------------------------------------------------                                                         
-                                                                                                                                    
-                                                                                                                                    
-                                                                                                                                    
-Date: 12-03-2025                                               SUDAAN                                                    Page:  9   
-Time: 16:50:02                                                                                                           Table: 1   
-                                                                                                                                    
-Variance Estimation Method: Taylor Series (WR)                                                                                      
-SE Method: Robust (Zeger-Liang, 1986)                                                                                               
-Working Correlations: Independent                                                                                                   
-Link Function: Logit                                                                                                                
-Response variable HYPERTENSION2: HYPERTENSION2                                                                                      
-For Subpopulation: PARTICIPANT_EXAMONLY_V3 = 1                                                                                      
-by: Independent Variables and Effects.                                                                                              
-                                                                                                                                    
----------------------------------------------------------------------------                                                         
-Independent Variables and                                                                                                           
-  Effects                     Estimate        (S.E)      t value    p-value                                                         
----------------------------------------------------------------------------                                                         
-Education Status (3                                                                                                                 
-  levels)                                                                                                                           
+  2                             -0.115        0.099       -1.163      0.245                                                                                                                 
   3                             -0.130        0.099       -1.311      0.190                                                         
 TIME                             0.104        0.006       18.301      0.000                                                         
 ---------------------------------------------------------------------------                                                         
