@@ -1,4 +1,4 @@
-1                                                          The SAS System                          16:55 Wednesday, December 3, 2025
+1                                                          The SAS System                            08:48 Friday, December 12, 2025
 
 NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
@@ -20,8 +20,8 @@ NOTE: Additional host information:
  W32_10PRO WIN 10.0.22621  Workstation
 
 NOTE: SAS initialization used:
-      real time           4.73 seconds
-      cpu time            0.09 seconds
+      real time           3.77 seconds
+      cpu time            0.15 seconds
       
 1          /*---------------------------------------------------------------------------------------
 2          
@@ -49,16 +49,16 @@ NOTE: Libref LIB was successfully assigned as follows:
 21         run;
 
 NOTE: There were 49245 observations read from the data set LIB.SOL_IPW_LONG.
-NOTE: The data set WORK.DB_IPW_BYVISIT has 36123 observations and 39 variables.
+NOTE: The data set WORK.DB_IPW_BYVISIT has 36086 observations and 39 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.11 seconds
-      cpu time            0.00 seconds
+      real time           0.66 seconds
+      cpu time            0.04 seconds
       
 
 22         
 23         * Fit SUDAAN analysis;
 24         proc rlogist data=db_ipw_byvisit filetype=sas r=independent semethod=zeger
-2                                                          The SAS System                          16:55 Wednesday, December 3, 2025
+2                                                          The SAS System                            08:48 Friday, December 12, 2025
 
 25         	notsorted;
 26         	nest strat hh_id_num;
@@ -90,12 +90,12 @@ Opened SAS data file DB_IPW_BYVISIT for reading.
 NOTE: SUDAAN sorted the main data set DB_IPW_BYVISIT by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
 NOTE: The PROCEDURE RLOGIST printed pages 1-9.
 NOTE: PROCEDURE RLOGIST used (Total process time):
-      real time           1.69 seconds
-      cpu time            1.20 seconds
+      real time           30.11 seconds
+      cpu time            1.10 seconds
       
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
 NOTE: The SAS System used:
-      real time           8.79 seconds
+      real time           38.41 seconds
       cpu time            1.31 seconds
       

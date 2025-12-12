@@ -1,5 +1,12 @@
-1                                                          The SAS System                          16:57 Wednesday, December 3, 2025
+1                                                          The SAS System                            08:48 Friday, December 12, 2025
 
+NOTE: Unable to open SASUSER.REGSTRY. WORK.REGSTRY will be opened instead.
+NOTE: All registry changes will be lost at the end of the session.
+
+WARNING: Unable to copy SASUSER registry to WORK registry. Because of this, you will not see registry customizations during this 
+         session.
+NOTE: Unable to open SASUSER.PROFILE. WORK.PROFILE will be opened instead.
+NOTE: All profile changes will be lost at the end of the session.
 NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.4 (TS1M4) 
       Licensed to UNIVERSITY OF NORTH CAROLINA CHAPEL HILL - SFA T&R, Site 70022629.
@@ -20,8 +27,8 @@ NOTE: Additional host information:
  W32_10PRO WIN 10.0.22621  Workstation
 
 NOTE: SAS initialization used:
-      real time           0.93 seconds
-      cpu time            0.18 seconds
+      real time           16.98 seconds
+      cpu time            0.07 seconds
       
 1          /*---------------------------------------------------------------------------------------
 2          
@@ -49,17 +56,17 @@ NOTE: Libref LIB was successfully assigned as follows:
 21         run;
 
 NOTE: There were 49245 observations read from the data set LIB.SOL_IPW_LONG.
-NOTE: The data set WORK.DB_IPW_BYVISIT has 36065 observations and 39 variables.
+NOTE: The data set WORK.DB_IPW_BYVISIT has 36028 observations and 39 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.57 seconds
-      cpu time            0.03 seconds
+2                                                          The SAS System                            08:48 Friday, December 12, 2025
+
+      real time           0.84 seconds
+      cpu time            0.01 seconds
       
 
 22         
 23         * Fit SUDAAN analysis;
 24         proc regress data=db_ipw_byvisit filetype=sas r=independent semethod=zeger
-2                                                          The SAS System                          16:57 Wednesday, December 3, 2025
-
 25         	notsorted;
 26         	nest strat hh_id_num;
 27         	weight weight_ipw_by_visit;
@@ -90,12 +97,12 @@ Opened SAS data file DB_IPW_BYVISIT for reading.
 NOTE: SUDAAN sorted the main data set DB_IPW_BYVISIT by NEST variable(s) STRAT, HH_ID_NUM, observation number for processing.
 NOTE: The PROCEDURE REGRESS printed pages 1-9.
 NOTE: PROCEDURE REGRESS used (Total process time):
-      real time           1.63 seconds
-      cpu time            1.15 seconds
+      real time           12.98 seconds
+      cpu time            0.93 seconds
       
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
 NOTE: The SAS System used:
-      real time           5.49 seconds
-      cpu time            1.42 seconds
+      real time           43.29 seconds
+      cpu time            1.12 seconds
       
